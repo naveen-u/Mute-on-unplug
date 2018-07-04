@@ -1,0 +1,24 @@
+#!/bin/bash
+
+#-------------------------------------------------------------------------------
+# Name:        Mute on unplug
+# Purpose:     Script to mute sound when headphones are unplugged.
+#              Volume is restored when headphones are plugged back in.
+# Author:      Naveen Unnikrishnan
+# Created:     07 Jun, 2018
+#-------------------------------------------------------------------------------
+
+acpi_listen | while IFS= read -r line;
+do
+    if [ "$line" = "jack/headphone HEADPHONE plug" ]
+    then
+       notify-send "Headphones connected - Unmuting sound"
+       amixer -q -D pulse sset Master unmute
+       sleep 1.5 && killall notify-osd
+    elif [ "$line" = "jack/headphone HEADPHONE unplug" ]
+    then
+       notify-send "Headphones disconnected - Muting sound"
+       amixer -q -D pulse sset Master mute
+       sleep 1.5 && killall notify-osd
+    fi
+done
