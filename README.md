@@ -4,7 +4,7 @@ A shell script to mute volume when headphones are unplugged. Volume is restored 
 
 Run the script to keep your audio to yourself. Useful for when in public places.
 
-### Prerequisites
+### Prerequisites/Packages used
 
 - acpid 2.0.26
 - amixer 1.1.0
